@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    logger.error('Error in send-to-line API', { error: error.message });
+    logger.error({ error: error.message }, 'Error in send-to-line API');
     return NextResponse.json(
       { error: 'Internal server error' }, 
       { status: 500 }

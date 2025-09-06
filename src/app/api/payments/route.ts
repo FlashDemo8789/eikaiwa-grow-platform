@@ -75,10 +75,10 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(result);
   } catch (error) {
-    logger.error('Failed to list payments', {
+    logger.error({
       error: error.message,
       userId: session?.user?.email,
-    });
+    }, 'Failed to list payments');
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -143,10 +143,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(payment, { status: 201 });
   } catch (error) {
-    logger.error('Failed to create payment', {
+    logger.error({
       error: error.message,
       userId: session?.user?.email,
-    });
+    }, 'Failed to create payment');
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

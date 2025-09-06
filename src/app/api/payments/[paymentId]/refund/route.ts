@@ -78,11 +78,11 @@ export async function POST(
 
     return NextResponse.json(refund, { status: 201 });
   } catch (error) {
-    logger.error('Failed to process refund', {
+    logger.error({
       error: error.message,
       paymentId: resolvedParams.paymentId,
       userId: session?.user?.email,
-    });
+    }, 'Failed to process refund');
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

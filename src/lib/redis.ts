@@ -27,7 +27,7 @@ export function getRedisClient(): Redis {
     })
 
     redis.on('error', (error) => {
-      logger.error('Redis connection error', { error: error.message })
+      logger.error({ error: error.message }, 'Redis connection error')
     })
 
     redis.on('reconnecting', () => {
@@ -104,7 +104,7 @@ export class CacheService {
       const value = await this.redis.get(key)
       return value ? JSON.parse(value) : null
     } catch (error) {
-      logger.error('Cache get error', { key, error })
+      logger.error({ key, error }, 'Cache get error')
       return null
     }
   }
@@ -117,7 +117,7 @@ export class CacheService {
       await this.redis.setex(key, ttl, JSON.stringify(value))
       return true
     } catch (error) {
-      logger.error('Cache set error', { key, ttl, error })
+      logger.error({ key, ttl, error }, 'Cache set error')
       return false
     }
   }
@@ -130,7 +130,7 @@ export class CacheService {
       await this.redis.del(key)
       return true
     } catch (error) {
-      logger.error('Cache delete error', { key, error })
+      logger.error({ key, error }, 'Cache delete error')
       return false
     }
   }
@@ -146,7 +146,7 @@ export class CacheService {
       await this.redis.del(...keys)
       return keys.length
     } catch (error) {
-      logger.error('Cache delete pattern error', { pattern, error })
+      logger.error({ pattern, error }, 'Cache delete pattern error')
       return 0
     }
   }
@@ -159,7 +159,7 @@ export class CacheService {
       const result = await this.redis.exists(key)
       return result === 1
     } catch (error) {
-      logger.error('Cache exists error', { key, error })
+      logger.error({ key, error }, 'Cache exists error')
       return false
     }
   }
@@ -187,7 +187,7 @@ export class CacheService {
 
       return data
     } catch (error) {
-      logger.error('Cache getOrSet error', { key, error })
+      logger.error({ key, error }, 'Cache getOrSet error')
       // Fallback to direct fetch
       return await fetchFn()
     }
@@ -204,7 +204,7 @@ export class CacheService {
       const results = await multi.exec()
       return results?.[0]?.[1] as number || 0
     } catch (error) {
-      logger.error('Cache increment error', { key, error })
+      logger.error({ key, error }, 'Cache increment error')
       return 0
     }
   }
@@ -235,7 +235,7 @@ export class CacheService {
       
       return true
     } catch (error) {
-      logger.error('Cache setWithLock error', { key, error })
+      logger.error({ key, error }, 'Cache setWithLock error')
       // Always try to release lock on error
       await this.redis.del(lockKey)
       return false
@@ -252,7 +252,7 @@ export class CacheService {
       const values = await this.redis.mget(...keys)
       return values.map(value => value ? JSON.parse(value) : null)
     } catch (error) {
-      logger.error('Cache mget error', { keys, error })
+      logger.error({ keys, error }, 'Cache mget error')
       return keys.map(() => null)
     }
   }
@@ -271,7 +271,7 @@ export class CacheService {
       await multi.exec()
       return true
     } catch (error) {
-      logger.error('Cache mset error', { keyValues, error })
+      logger.error({ keyValues, error }, 'Cache mset error')
       return false
     }
   }
@@ -290,7 +290,7 @@ export class CacheService {
         connected: this.redis.status === 'ready',
       }
     } catch (error) {
-      logger.error('Cache stats error', { error })
+      logger.error({ error }, 'Cache stats error')
       return null
     }
   }
@@ -304,7 +304,7 @@ export class CacheService {
       logger.warn('All cache flushed')
       return true
     } catch (error) {
-      logger.error('Cache flush error', { error })
+      logger.error({ error }, 'Cache flush error')
       return false
     }
   }
@@ -317,7 +317,7 @@ export class CacheService {
       await this.redis.quit()
       logger.info('Redis connection closed')
     } catch (error) {
-      logger.error('Redis disconnect error', { error })
+      logger.error({ error }, 'Redis disconnect error')
     }
   }
 }

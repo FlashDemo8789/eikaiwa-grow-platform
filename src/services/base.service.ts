@@ -24,7 +24,7 @@ export abstract class BaseService {
       field,
     }
 
-    logger.error(`[${this.serviceName}] ${message}`, { error })
+    logger.error({ error }, `[${this.serviceName}] ${message}`)
 
     return {
       success: false,
@@ -57,9 +57,9 @@ export abstract class BaseService {
       logger.info(`[${this.serviceName}] ${operationName} completed successfully`)
       return this.success(result)
     } catch (error) {
-      logger.error(`[${this.serviceName}] ${operationName} failed`, {
+      logger.error({
         error: error instanceof Error ? error.message : error,
-      })
+      }, `[${this.serviceName}] ${operationName} failed`)
 
       if (error instanceof Error) {
         // Handle specific database errors

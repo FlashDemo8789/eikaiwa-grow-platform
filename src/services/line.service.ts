@@ -83,7 +83,7 @@ export class LineService {
 
       logger.info('LINE text message sent successfully', { userId, messageLength: message.length });
     } catch (error) {
-      logger.error('Failed to send LINE text message', { error, userId });
+      logger.error({ error, userId }, 'Failed to send LINE text message');
       throw error;
     }
   }
@@ -232,7 +232,7 @@ export class LineService {
       await this.client.pushMessage(userId, flexMessage);
       logger.info('LINE business card sent successfully', { userId, schoolName: schoolInfo.name });
     } catch (error) {
-      logger.error('Failed to send LINE business card', { error, userId });
+      logger.error({ error, userId }, 'Failed to send LINE business card');
       throw error;
     }
   }
@@ -364,7 +364,7 @@ export class LineService {
       await this.client.pushMessage(userId, flexMessage);
       logger.info('LINE event notification sent successfully', { userId, eventName: event.name });
     } catch (error) {
-      logger.error('Failed to send LINE event notification', { error, userId });
+      logger.error({ error, userId }, 'Failed to send LINE event notification');
       throw error;
     }
   }
@@ -466,7 +466,7 @@ export class LineService {
       logger.info('Rich menu created successfully', { richMenuId });
       return richMenuId;
     } catch (error) {
-      logger.error('Failed to create rich menu', { error });
+      logger.error({ error }, 'Failed to create rich menu');
       throw error;
     }
   }
@@ -488,7 +488,7 @@ export class LineService {
 
       logger.info('Broadcast message sent successfully', { userCount: userIds.length, messageType });
     } catch (error) {
-      logger.error('Failed to send broadcast message', { error, userCount: userIds.length });
+      logger.error({ error, userCount: userIds.length }, 'Failed to send broadcast message');
       throw error;
     }
   }
@@ -514,7 +514,7 @@ export class LineService {
             logger.info('Unhandled event type', { eventType: event.type });
         }
       } catch (error) {
-        logger.error('Error handling webhook event', { error, event });
+        logger.error({ error, event }, 'Error handling webhook event');
       }
     });
 
@@ -810,11 +810,11 @@ export class LineService {
         studentName: data.studentName 
       });
     } catch (error) {
-      logger.error('Failed to send lesson photo to parent', { 
+      logger.error({ 
         error, 
         parentLineId, 
         studentName: data.studentName 
-      });
+      }, 'Failed to send lesson photo to parent');
       throw error;
     }
   }

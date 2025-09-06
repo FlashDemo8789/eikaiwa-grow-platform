@@ -39,7 +39,7 @@ export class LiffService {
       this.initialized = true;
       logger.info('LIFF initialized successfully');
     } catch (error) {
-      logger.error('LIFF initialization failed', { error });
+      logger.error({ error }, 'LIFF initialization failed');
       throw new Error('LIFFの初期化に失敗しました');
     }
   }
@@ -64,7 +64,7 @@ export class LiffService {
         });
       }
     } catch (error) {
-      logger.error('LIFF login failed', { error });
+      logger.error({ error }, 'LIFF login failed');
       throw new Error('LINEログインに失敗しました');
     }
   }
@@ -77,7 +77,7 @@ export class LiffService {
         logger.info('LIFF logout successful');
       }
     } catch (error) {
-      logger.error('LIFF logout failed', { error });
+      logger.error({ error }, 'LIFF logout failed');
       throw new Error('LINEログアウトに失敗しました');
     }
   }
@@ -104,7 +104,7 @@ export class LiffService {
         email
       };
     } catch (error) {
-      logger.error('LIFF profile fetch failed', { error });
+      logger.error({ error }, 'LIFF profile fetch failed');
       throw new Error('プロフィール取得に失敗しました');
     }
   }
@@ -118,7 +118,7 @@ export class LiffService {
 
       return await liff.getDecodedIDToken()?.email;
     } catch (error) {
-      logger.error('LIFF email fetch failed', { error });
+      logger.error({ error }, 'LIFF email fetch failed');
       return undefined;
     }
   }
@@ -132,7 +132,7 @@ export class LiffService {
 
       return liff.getAccessToken();
     } catch (error) {
-      logger.error('LIFF access token fetch failed', { error });
+      logger.error({ error }, 'LIFF access token fetch failed');
       return null;
     }
   }
@@ -146,7 +146,7 @@ export class LiffService {
 
       return liff.getContext() as LiffContext;
     } catch (error) {
-      logger.error('LIFF context fetch failed', { error });
+      logger.error({ error }, 'LIFF context fetch failed');
       return null;
     }
   }
@@ -167,7 +167,7 @@ export class LiffService {
         external
       });
     } catch (error) {
-      logger.error('LIFF window open failed', { error });
+      logger.error({ error }, 'LIFF window open failed');
     }
   }
 
@@ -177,7 +177,7 @@ export class LiffService {
       if (!this.initialized) return;
       liff.closeWindow();
     } catch (error) {
-      logger.error('LIFF window close failed', { error });
+      logger.error({ error }, 'LIFF window close failed');
     }
   }
 
@@ -195,7 +195,7 @@ export class LiffService {
       await liff.sendMessages(messages);
       logger.info('LIFF messages sent successfully');
     } catch (error) {
-      logger.error('LIFF send messages failed', { error });
+      logger.error({ error }, 'LIFF send messages failed');
       throw new Error('メッセージの送信に失敗しました');
     }
   }
@@ -214,7 +214,7 @@ export class LiffService {
       await liff.shareTargetPicker(messages);
       logger.info('LIFF share target picker used successfully');
     } catch (error) {
-      logger.error('LIFF share target picker failed', { error });
+      logger.error({ error }, 'LIFF share target picker failed');
       throw new Error('共有に失敗しました');
     }
   }
@@ -233,7 +233,7 @@ export class LiffService {
       const result = await liff.scanCode();
       return result.value;
     } catch (error) {
-      logger.error('LIFF QR scan failed', { error });
+      logger.error({ error }, 'LIFF QR scan failed');
       return null;
     }
   }

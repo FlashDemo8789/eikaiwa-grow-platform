@@ -39,9 +39,9 @@ export async function POST(request: NextRequest) {
 
     return response
   } catch (error) {
-    logger.error('Logout error', {
+    logger.error({
       error: error instanceof Error ? error.message : error,
-    })
+    }, 'Logout error')
 
     return ApiResponseBuilder.internalError()
   }

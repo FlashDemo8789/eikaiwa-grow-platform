@@ -39,9 +39,9 @@ export async function GET(request: NextRequest) {
       }
     }
   } catch (error) {
-    logger.error('Health check endpoint error', {
+    logger.error({
       error: error instanceof Error ? error.message : error,
-    })
+    }, 'Health check endpoint error')
 
     return ApiResponseBuilder.internalError('Health check endpoint failed')
   }

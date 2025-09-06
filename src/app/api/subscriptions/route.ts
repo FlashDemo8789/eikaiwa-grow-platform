@@ -75,10 +75,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(subscription, { status: 201 });
   } catch (error) {
-    logger.error('Failed to create subscription', {
+    logger.error({
       error: error.message,
       userId: session?.user?.email,
-    });
+    }, 'Failed to create subscription');
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

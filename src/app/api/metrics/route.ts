@@ -50,9 +50,9 @@ export async function GET(request: NextRequest) {
 
     return ApiResponseBuilder.success(metrics, 'Metrics retrieved successfully')
   } catch (error) {
-    logger.error('Metrics endpoint error', {
+    logger.error({
       error: error instanceof Error ? error.message : error,
-    })
+    }, 'Metrics endpoint error')
 
     return ApiResponseBuilder.internalError()
   }

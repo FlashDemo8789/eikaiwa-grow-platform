@@ -73,10 +73,10 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(result);
   } catch (error) {
-    logger.error('Failed to list invoices', {
+    logger.error({
       error: error.message,
       userId: session?.user?.email,
-    });
+    }, 'Failed to list invoices');
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -152,10 +152,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(invoice, { status: 201 });
   } catch (error) {
-    logger.error('Failed to create invoice', {
+    logger.error({
       error: error.message,
       userId: session?.user?.email,
-    });
+    }, 'Failed to create invoice');
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

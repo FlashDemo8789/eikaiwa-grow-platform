@@ -65,7 +65,7 @@ export class LineAuthService {
       logger.info('LINE token exchange successful');
       return response.data;
     } catch (error) {
-      logger.error('LINE token exchange failed', { error });
+      logger.error({ error }, 'LINE token exchange failed');
       throw new Error('LINE認証に失敗しました');
     }
   }
@@ -82,7 +82,7 @@ export class LineAuthService {
       logger.info('LINE profile fetch successful', { userId: response.data.userId });
       return response.data;
     } catch (error) {
-      logger.error('LINE profile fetch failed', { error });
+      logger.error({ error }, 'LINE profile fetch failed');
       throw new Error('LINEプロフィール取得に失敗しました');
     }
   }
@@ -105,7 +105,7 @@ export class LineAuthService {
       logger.info('LINE ID token verification successful');
       return response.data;
     } catch (error) {
-      logger.error('LINE ID token verification failed', { error });
+      logger.error({ error }, 'LINE ID token verification failed');
       throw new Error('LINEトークン検証に失敗しました');
     }
   }
@@ -130,7 +130,7 @@ export class LineAuthService {
       logger.info('LINE token refresh successful');
       return response.data;
     } catch (error) {
-      logger.error('LINE token refresh failed', { error });
+      logger.error({ error }, 'LINE token refresh failed');
       throw new Error('LINEトークン更新に失敗しました');
     }
   }
@@ -153,7 +153,7 @@ export class LineAuthService {
 
       logger.info('LINE token revocation successful');
     } catch (error) {
-      logger.error('LINE token revocation failed', { error });
+      logger.error({ error }, 'LINE token revocation failed');
       throw new Error('LINEトークン無効化に失敗しました');
     }
   }
@@ -169,7 +169,7 @@ export class LineAuthService {
 
       return response.data.email || null;
     } catch (error) {
-      logger.error('LINE email fetch failed', { error });
+      logger.error({ error }, 'LINE email fetch failed');
       return null;
     }
   }
@@ -185,7 +185,7 @@ export class LineAuthService {
 
       return response.data.friendFlag;
     } catch (error) {
-      logger.error('LINE friendship status check failed', { error });
+      logger.error({ error }, 'LINE friendship status check failed');
       return false;
     }
   }

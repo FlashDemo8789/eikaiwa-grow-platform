@@ -139,7 +139,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    logger.error('Error creating trial booking', { error: error.message });
+    logger.error({ error: error.message }, 'Error creating trial booking');
     return NextResponse.json(
       { error: 'Failed to create booking' },
       { status: 500 }
@@ -211,7 +211,7 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
-    logger.error('Error fetching available slots', { error: error.message });
+    logger.error({ error: error.message }, 'Error fetching available slots');
     return NextResponse.json(
       { error: 'Failed to fetch available slots' },
       { status: 500 }

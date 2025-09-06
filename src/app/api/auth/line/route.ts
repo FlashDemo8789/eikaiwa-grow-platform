@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.redirect(authUrl);
   } catch (error) {
-    logger.error('LINE login initiation failed', { error });
+    logger.error({ error }, 'LINE login initiation failed');
     
     return NextResponse.json(
       { error: 'LINEログインの開始に失敗しました' },

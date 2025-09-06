@@ -94,7 +94,7 @@ export class JapanesePaymentService {
 
       return response.data;
     } catch (error) {
-      logger.error('PayPay payment creation failed', { error, request });
+      logger.error({ error, request }, 'PayPay payment creation failed');
       throw new Error('PayPay決済の作成に失敗しました');
     }
   }
@@ -114,7 +114,7 @@ export class JapanesePaymentService {
 
       return response.data;
     } catch (error) {
-      logger.error('PayPay payment retrieval failed', { error, merchantPaymentId });
+      logger.error({ error, merchantPaymentId }, 'PayPay payment retrieval failed');
       throw new Error('PayPay決済情報の取得に失敗しました');
     }
   }
@@ -135,7 +135,7 @@ export class JapanesePaymentService {
       logger.info('PayPay payment canceled successfully', { merchantPaymentId });
       return response.data;
     } catch (error) {
-      logger.error('PayPay payment cancellation failed', { error, merchantPaymentId });
+      logger.error({ error, merchantPaymentId }, 'PayPay payment cancellation failed');
       throw new Error('PayPay決済のキャンセルに失敗しました');
     }
   }
@@ -175,7 +175,7 @@ export class JapanesePaymentService {
 
       return response.data;
     } catch (error) {
-      logger.error('PayPay refund failed', { error, merchantPaymentId, refundId });
+      logger.error({ error, merchantPaymentId, refundId }, 'PayPay refund failed');
       throw new Error('PayPay返金処理に失敗しました');
     }
   }
@@ -236,7 +236,7 @@ export class JapanesePaymentService {
 
       return payment;
     } catch (error) {
-      logger.error('Convenience store payment generation failed', { error });
+      logger.error({ error }, 'Convenience store payment generation failed');
       throw new Error('コンビニ決済の生成に失敗しました');
     }
   }

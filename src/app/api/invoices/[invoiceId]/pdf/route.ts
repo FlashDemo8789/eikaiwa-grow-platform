@@ -46,7 +46,7 @@ export async function GET(
     // }
 
     // Generate PDF
-    const pdfBytes = await invoiceService.generateInvoicePDF(params.invoiceId);
+    const pdfBytes = await invoiceService.generateInvoicePDF(invoiceId);
 
     // Return PDF as response
     return new NextResponse(pdfBytes, {
@@ -58,11 +58,11 @@ export async function GET(
       },
     });
   } catch (error) {
-    logger.error('Failed to generate invoice PDF', {
+    logger.error({
       error: error.message,
-      invoiceId: params.invoiceId,
+      invoiceId: invoiceId,
       userId: session?.user?.email,
-    });
+    }, 'Failed to generate invoice PDF');
 
     return NextResponse.json(
       { error: 'Failed to generate PDF' },

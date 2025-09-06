@@ -48,11 +48,11 @@ export async function GET(
 
     return NextResponse.json(payment);
   } catch (error) {
-    logger.error('Failed to get payment', {
+    logger.error({
       error: error.message,
       paymentId: resolvedParams.paymentId,
       userId: session?.user?.email,
-    });
+    }, 'Failed to get payment');
 
     return NextResponse.json(
       { error: 'Internal server error' },

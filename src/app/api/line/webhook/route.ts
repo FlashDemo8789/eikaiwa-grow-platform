@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
   } catch (error) {
-    logger.error('LINE webhook processing failed', { error });
+    logger.error({ error }, 'LINE webhook processing failed');
     return NextResponse.json({ error: 'Webhook processing failed' }, { status: 500 });
   }
 }

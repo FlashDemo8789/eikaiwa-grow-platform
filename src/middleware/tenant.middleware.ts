@@ -41,9 +41,9 @@ export async function tenantMiddleware(
     // Call the handler with tenant context
     return await handler(requestWithTenant)
   } catch (error) {
-    logger.error('Tenant middleware error', {
+    logger.error({
       error: error instanceof Error ? error.message : error,
-    })
+    }, 'Tenant middleware error')
     
     return ApiResponseBuilder.internalError('Tenant context processing failed')
   }
