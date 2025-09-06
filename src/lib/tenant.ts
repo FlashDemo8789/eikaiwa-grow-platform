@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
 import { logger } from '@/lib/logger'
-import { Organization, Plan } from '@prisma/client'
+import { Organization, Plan } from '@/lib/prisma-stub'
 
 export interface TenantContext {
   organizationId: string

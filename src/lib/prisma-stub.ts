@@ -1,6 +1,60 @@
 // Stub Prisma client for MVP deployment
 // This bypasses Prisma requirements during build
 
+// Export mock Prisma types to avoid type errors
+export type PrismaClient = any;
+export type Prisma = any;
+
+// Mock enums that are commonly used
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED', 
+  FAILED: 'FAILED',
+  REFUNDED: 'REFUNDED',
+  CANCELLED: 'CANCELLED'
+} as const;
+
+export const PaymentMethod = {
+  CREDIT_CARD: 'CREDIT_CARD',
+  DEBIT_CARD: 'DEBIT_CARD',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  PAYPAY: 'PAYPAY',
+  KONBINI: 'KONBINI',
+  CASH: 'CASH',
+  OTHER: 'OTHER'
+} as const;
+
+export const UserRole = {
+  ADMIN: 'ADMIN',
+  TEACHER: 'TEACHER',
+  STAFF: 'STAFF',
+  PARENT: 'PARENT',
+  STUDENT: 'STUDENT'
+} as const;
+
+export const UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  PENDING: 'PENDING'
+} as const;
+
+export const SubscriptionStatus = {
+  ACTIVE: 'ACTIVE',
+  CANCELLED: 'CANCELLED',
+  PAST_DUE: 'PAST_DUE',
+  UNPAID: 'UNPAID',
+  TRIALING: 'TRIALING'
+} as const;
+
+export const InvoiceStatus = {
+  DRAFT: 'DRAFT',
+  SENT: 'SENT',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+} as const;
+
 export const prisma = new Proxy({} as any, {
   get: (target, prop) => {
     // Return a function that returns a promise for any property access

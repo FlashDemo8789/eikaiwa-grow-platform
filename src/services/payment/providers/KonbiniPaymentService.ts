@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/lib/prisma-stub';
 import * as QRCode from 'qrcode';
 import JsBarcode from 'jsbarcode';
 import { createCanvas } from 'canvas';

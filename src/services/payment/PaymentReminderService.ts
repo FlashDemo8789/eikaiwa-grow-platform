@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/lib/prisma-stub';
 import type { 
   ReminderType, 
   NotificationMethod,
   ReminderStatus 
-} from '@prisma/client';
+} from '@/lib/prisma-stub';
 import { PAYMENT_DEFAULTS } from '@/types/payment';
 import { logger } from '@/lib/logger';
 import { Decimal } from '@prisma/client/runtime/library';

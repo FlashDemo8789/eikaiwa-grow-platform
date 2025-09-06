@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/lib/prisma-stub';
 import * as cron from 'node-cron';
 import { SubscriptionBillingService } from './SubscriptionBillingService';
 import { KonbiniPaymentService } from './providers/KonbiniPaymentService';

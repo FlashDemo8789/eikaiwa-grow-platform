@@ -1,4 +1,4 @@
-import { User } from '@prisma/client'
+import { User } from '@/lib/prisma-stub'
 import bcrypt from 'bcryptjs'
 import { BaseService } from './base.service'
 import { UserRepository } from '@/repositories/user.repository'

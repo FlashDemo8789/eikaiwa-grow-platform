@@ -12,7 +12,7 @@ import type {
   RefundStatus,
   ReminderType,
   NotificationMethod
-} from '@prisma/client';
+} from '@/lib/prisma-stub';
 
 // Core payment interfaces
 export interface CreatePaymentRequest {

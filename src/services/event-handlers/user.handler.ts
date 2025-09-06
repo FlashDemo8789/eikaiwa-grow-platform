@@ -1,4 +1,4 @@
-import { Event } from '@prisma/client'
+import { Event } from '@/lib/prisma-stub'
 import { EventHandler } from '../event.service'
 import { logger } from '@/lib/logger'
 import prisma from '@/lib/prisma'

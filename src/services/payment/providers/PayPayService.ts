@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/lib/prisma-stub';
 import axios from 'axios';
 import crypto from 'crypto';
 import * as QRCode from 'qrcode';

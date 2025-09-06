@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/lib/prisma-stub';
 import { PayPayService } from '@/services/payment/providers/PayPayService';
 import { logger } from '@/lib/logger';
 

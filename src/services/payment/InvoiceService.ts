@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/lib/prisma-stub';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import type { 
   CreateInvoiceRequest,

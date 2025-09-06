@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
 import { EventPayload, ServiceResponse } from '@/types/api'
 import { BaseService } from './base.service'
-import { Event, EventStatus } from '@prisma/client'
+import { Event, EventStatus } from '@/lib/prisma-stub'
 import { logger } from '@/lib/logger'
 
 export interface EventHandler {

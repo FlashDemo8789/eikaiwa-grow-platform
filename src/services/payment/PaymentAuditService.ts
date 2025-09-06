@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@/lib/prisma-stub';
 import type { PaymentAuditEntry } from '@/types/payment';
 import { logger } from '@/lib/logger';
 

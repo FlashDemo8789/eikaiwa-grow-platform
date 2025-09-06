@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { NextRequest } from 'next/server'
-import { User } from '@prisma/client'
+import { User } from '@/lib/prisma-stub'
 
 const JWT_SECRET = process.env.JWT_SECRET!
 const JWT_EXPIRES_IN = '7d' // 7 days

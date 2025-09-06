@@ -1,4 +1,4 @@
-import { User } from '@prisma/client'
+import { User } from '@/lib/prisma-stub'
 import prisma from '@/lib/prisma'
 import { BaseRepository } from './base.repository'
 import { PaginationParams, FilterParams, RepositoryResponse } from '@/types/api'
