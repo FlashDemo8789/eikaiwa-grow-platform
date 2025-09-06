@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@/lib/prisma-stub';
+import { prisma } from '@/lib/prisma';
 import { PaymentService } from '@/services/payment/PaymentService';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-options';
 import { logger } from '@/lib/logger';
 import { z } from 'zod';
 
-const prisma = new PrismaClient();
 const paymentService = new PaymentService(prisma);
 
 // Validation schemas

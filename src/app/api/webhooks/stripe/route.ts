@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@/lib/prisma-stub';
+import { prisma } from '@/lib/prisma';
 import { StripePaymentService } from '@/services/payment/providers/StripePaymentService';
 import { logger } from '@/lib/logger';
 
-const prisma = new PrismaClient();
 const stripeService = new StripePaymentService(prisma);
 
 /**

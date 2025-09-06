@@ -130,8 +130,7 @@ export const builtInHealthChecks = {
     name: 'database',
     check: async () => {
       try {
-        const { PrismaClient } = await import('@prisma/client')
-        const prisma = new PrismaClient()
+        const { prisma } = await import('@/lib/prisma')
         
         const start = Date.now()
         await prisma.$queryRaw`SELECT 1`

@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@/lib/prisma-stub';
+import { prisma } from '@/lib/prisma';
 import { InvoiceService } from '@/services/payment/InvoiceService';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-options';
 import { logger } from '@/lib/logger';
 
-const prisma = new PrismaClient();
 const invoiceService = new InvoiceService(prisma);
 
 /**

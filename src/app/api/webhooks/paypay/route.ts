@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@/lib/prisma-stub';
+import { prisma } from '@/lib/prisma';
 import { PayPayService } from '@/services/payment/providers/PayPayService';
 import { logger } from '@/lib/logger';
 
-const prisma = new PrismaClient();
 const payPayService = new PayPayService(prisma);
 
 /**

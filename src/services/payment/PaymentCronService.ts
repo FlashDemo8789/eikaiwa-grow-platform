@@ -1,4 +1,4 @@
-import { PrismaClient } from '@/lib/prisma-stub';
+import { prisma } from '@/lib/prisma';
 import * as cron from 'node-cron';
 import { SubscriptionBillingService } from './SubscriptionBillingService';
 import { KonbiniPaymentService } from './providers/KonbiniPaymentService';
@@ -6,7 +6,7 @@ import { PaymentReminderService } from './PaymentReminderService';
 import { logger } from '@/lib/logger';
 
 export class PaymentCronService {
-  private prisma: PrismaClient;
+  private prisma: any;
   private subscriptionService: SubscriptionBillingService;
   private konbiniService: KonbiniPaymentService;
   private reminderService: PaymentReminderService;
