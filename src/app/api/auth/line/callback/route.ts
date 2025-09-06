@@ -142,7 +142,7 @@ export async function GET(request: NextRequest) {
     });
 
     // Set HTTP-only cookie
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     cookieStore.set('auth-token', jwtToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -155,11 +155,11 @@ export async function GET(request: NextRequest) {
     const stateData = JSON.parse(Buffer.from(state, 'base64url').toString());
     const redirectUrl = stateData.redirectUrl || '/dashboard';
 
-    logger.info('LINE login successful', { 
+    logger.info({ 
       userId: user.id, 
       lineUserId: lineProfile.userId,
       isFriend 
-    });
+    }, 'LINE login successful');
 
     return NextResponse.redirect(`${process.env.APP_URL}${redirectUrl}`);
 

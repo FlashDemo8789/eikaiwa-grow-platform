@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 
     const authUrl = lineAuthService.generateAuthUrl(state);
     
-    logger.info('LINE login initiated', { state });
+    logger.info({ state }, 'LINE login initiated');
     
     return NextResponse.redirect(authUrl);
   } catch (error) {

@@ -31,11 +31,11 @@ export async function POST(request: NextRequest) {
     
     if (!result.success || !result.data) {
       // Log failed login attempt
-      logger.warn('Failed login attempt', {
+      logger.warn({
         email,
         ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip'),
         userAgent: request.headers.get('user-agent'),
-      })
+      }, 'Failed login attempt')
 
       if (result.error?.code === 'INVALID_CREDENTIALS') {
         return ApiResponseBuilder.unauthorizedError('Invalid email or password')
