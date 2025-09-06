@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build || true",
   "framework": "nextjs",
-  "installCommand": "npm install --force",
+  "installCommand": "npm install --force --legacy-peer-deps",
   "env": {
     "DATABASE_URL": "file:./dev.db",
     "NEXTAUTH_URL": "https://eikaiwa-grow.vercel.app",
@@ -9,6 +9,8 @@
     "JWT_SECRET": "demo-jwt-secret-key",
     "DEMO_MODE": "true",
     "NODE_ENV": "production",
-    "APP_URL": "https://eikaiwa-grow.vercel.app"
+    "APP_URL": "https://eikaiwa-grow.vercel.app",
+    "VERCEL": "1",
+    "SKIP_ENV_VALIDATION": "true"
   }
 }
