@@ -19,6 +19,14 @@ export type ReminderType = 'PAYMENT_DUE' | 'OVERDUE' | 'CUSTOM';
 export type NotificationMethod = 'EMAIL' | 'SMS' | 'BOTH';
 export type ReminderStatus = 'PENDING' | 'SENT' | 'FAILED';
 
+// Mock EventStatus enum
+export const EventStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+} as const;
+
 // Mock enums that are commonly used
 export const PaymentStatus = {
   PENDING: 'PENDING',

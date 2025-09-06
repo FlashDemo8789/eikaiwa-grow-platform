@@ -12,6 +12,9 @@
     "NODE_ENV": "production",
     "APP_URL": "https://eikaiwa-grow.vercel.app",
     "VERCEL": "1",
-    "SKIP_ENV_VALIDATION": "true"
+    "SKIP_ENV_VALIDATION": "true",
+    "PAYPAY_API_KEY": "demo-api-key",
+    "PAYPAY_API_SECRET": "demo-api-secret",
+    "PAYPAY_MERCHANT_ID": "demo-merchant"
   }
 }
