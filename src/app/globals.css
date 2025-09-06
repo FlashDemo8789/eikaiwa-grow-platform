@@ -3,13 +3,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Japanese seasonal colors */
+  --sakura: #F8BBD0;
+  --momiji: #FF6B35;
+  --sora: #87CEEB;
+  --yamabuki: #F4C430;
+  --murasaki: #9A4C95;
+  --midori: #4F7942;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), var(--font-noto-sans-jp), system-ui, -apple-system, sans-serif;
+  --font-japanese: var(--font-noto-sans-jp), "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +30,228 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/* Japanese typography styles */
+.japanese-text {
+  font-family: var(--font-japanese);
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+.japanese-title {
+  font-family: var(--font-japanese);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.japanese-heading {
+  font-family: var(--font-japanese);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.japanese-label {
+  font-family: var(--font-japanese);
+  font-weight: 500;
+}
+
+.japanese-input {
+  font-family: var(--font-japanese);
+}
+
+.japanese-error {
+  font-family: var(--font-japanese);
+  font-size: 0.875rem;
+}
+
+.japanese-help {
+  font-family: var(--font-japanese);
+  font-size: 0.875rem;
+}
+
+.japanese-name {
+  font-family: var(--font-japanese);
+  font-weight: 500;
+}
+
+.japanese-event-title {
+  font-family: var(--font-japanese);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Seasonal theme styles */
+.seasonal-theme {
+  position: relative;
+}
+
+.seasonal-theme::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--seasonal-background, linear-gradient(135deg, #F8BBD0 0%, #FFB6C1 100%));
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Hanko seal styles */
+.hanko-seal canvas {
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(204, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.hanko-seal:hover canvas {
+  box-shadow: 0 4px 12px rgba(204, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Japanese layout styles */
+.japanese-layout {
+  font-family: var(--font-japanese);
+}
+
+/* Information-dense layout (Japanese preference) */
+.japanese-compact {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.japanese-compact .space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+/* Japanese form styles */
+.japanese-form {
+  font-family: var(--font-japanese);
+}
+
+.japanese-form input,
+.japanese-form textarea,
+.japanese-form select {
+  font-family: var(--font-japanese);
+  border: 1.5px solid #e5e7eb;
+  border-radius: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.japanese-form input:focus,
+.japanese-form textarea:focus,
+.japanese-form select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Invoice styles */
+.japanese-invoice {
+  font-family: var(--font-japanese);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.japanese-invoice table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.japanese-invoice th,
+.japanese-invoice td {
+  border: 1px solid #d1d5db;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.japanese-invoice th {
+  background-color: #f9fafb;
+  font-weight: 500;
+}
+
+/* Document seal styles */
+.document-seal {
+  font-family: var(--font-japanese);
+  background: #fefefe;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Event card styles */
+.event-card {
+  font-family: var(--font-japanese);
+  transition: all 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Parent communication styles */
+.parent-communication-composer {
+  font-family: var(--font-japanese);
+}
+
+.parent-communication-composer textarea {
+  font-family: var(--font-japanese);
+  line-height: 1.8;
+  resize: vertical;
+}
+
+/* Responsive Japanese text sizing */
+@media (max-width: 768px) {
+  .japanese-text {
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  
+  .japanese-title {
+    font-size: 1.25rem;
+  }
+  
+  .japanese-heading {
+    font-size: 1.125rem;
+  }
+}
+
+/* Print styles for Japanese documents */
+@media print {
+  .japanese-invoice,
+  .document-seal {
+    font-family: "MS Mincho", "Yu Mincho", serif;
+    color: #000;
+    background: #fff;
+  }
+}
+
+/* Accessibility improvements */
+.japanese-text:lang(ja) {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .japanese-form input,
+  .japanese-form textarea,
+  .japanese-form select {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .event-card,
+  .hanko-seal canvas,
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }

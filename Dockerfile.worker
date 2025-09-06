@@ -1,0 +1,49 @@
+# Worker container for background job processing
+FROM node:18-alpine AS base
+WORKDIR /app
+
+# Install dependencies
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+COPY package.json package-lock.json* ./
+RUN npm ci --only=production && npm cache clean --force
+
+# Build worker
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
+
+# Build only the worker components
+RUN npm run build
+
+# Production worker image
+FROM base AS runner
+WORKDIR /app
+
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 worker
+
+# Copy built application
+COPY --from=builder --chown=worker:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=worker:nodejs /app/dist ./dist
+COPY --from=builder --chown=worker:nodejs /app/prisma ./prisma
+COPY --from=builder --chown=worker:nodejs /app/package.json ./
+
+# Copy worker script
+COPY --from=builder --chown=worker:nodejs /app/docker/scripts/worker.js ./worker.js
+RUN chmod +x ./worker.js
+
+USER worker
+
+ENV NODE_ENV production
+
+# Health check for worker
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node -e "console.log('Worker health check')" || exit 1
+
+CMD ["node", "worker.js"]

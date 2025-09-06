@@ -1,0 +1,19 @@
+{
+  "dashboard": {
+    "title": "ダッシュボード",
+    "welcome": "ようこそ"
+  },
+  "navigation": {
+    "photos": "写真共有",
+    "payments": "支払い管理",
+    "certificates": "証明書",
+    "bookings": "予約管理"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "back": "戻る"
+  }
+}
