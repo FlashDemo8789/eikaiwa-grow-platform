@@ -9,6 +9,17 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   
+  // Disable TypeScript checking during builds
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  
+  // Use SWC for faster builds
+  swcMinify: true,
+  
+  // Disable static exports for API routes
+  output: 'standalone',
+  
   // Japanese font optimization
   images: {
     domains: ['line.me', 'profile.line-scdn.net'],

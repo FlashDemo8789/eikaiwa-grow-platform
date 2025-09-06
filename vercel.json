@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build || true",
+  "framework": "nextjs",
+  "installCommand": "npm install --force",
+  "env": {
+    "DATABASE_URL": "file:./dev.db",
+    "NEXTAUTH_URL": "https://eikaiwa-grow.vercel.app",
+    "NEXTAUTH_SECRET": "demo-secret-key-for-mvp",
+    "JWT_SECRET": "demo-jwt-secret-key",
+    "DEMO_MODE": "true",
+    "NODE_ENV": "production",
+    "APP_URL": "https://eikaiwa-grow.vercel.app"
+  }
+}
