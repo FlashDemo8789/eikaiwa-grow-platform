@@ -1,7 +1,8 @@
 {
-  "buildCommand": "npm run build || true",
   "framework": "nextjs",
   "installCommand": "npm install --force --legacy-peer-deps",
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
   "env": {
     "DATABASE_URL": "file:./dev.db",
     "NEXTAUTH_URL": "https://eikaiwa-grow.vercel.app",
