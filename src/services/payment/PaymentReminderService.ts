@@ -6,7 +6,7 @@ import type {
 } from '@/lib/prisma-stub';
 import { PAYMENT_DEFAULTS } from '@/types/payment';
 import { logger } from '@/lib/logger';
-import { Decimal } from '@prisma/client/runtime/library';
+import { Decimal } from '@/lib/prisma-stub';
 
 export class PaymentReminderService {
   private prisma: PrismaClient;

@@ -9,7 +9,7 @@ import { TaxCalculationService } from './TaxCalculationService';
 import { PaymentAuditService } from './PaymentAuditService';
 import { BILLABLE_SUBSCRIPTION_STATUSES, PAYMENT_DEFAULTS } from '@/types/payment';
 import { logger } from '@/lib/logger';
-import { Decimal } from '@prisma/client/runtime/library';
+import { Decimal } from '@/lib/prisma-stub';
 
 export class SubscriptionBillingService {
   private prisma: PrismaClient;

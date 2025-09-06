@@ -1,11 +1,26 @@
 import type { NextAuthOptions } from 'next-auth';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@/lib/prisma-stub';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import bcrypt from 'bcryptjs';
+import { prisma } from '@/lib/prisma-stub';
 
-const prisma = new PrismaClient();
+// Mock PrismaAdapter for MVP
+const PrismaAdapter = (client: any) => ({
+  createUser: async (data: any) => ({ id: 'mock-id', ...data }),
+  getUser: async (id: string) => null,
+  getUserByEmail: async (email: string) => null,
+  getUserByAccount: async (account: any) => null,
+  updateUser: async (data: any) => ({ id: 'mock-id', ...data }),
+  deleteUser: async (id: string) => null,
+  linkAccount: async (data: any) => data,
+  unlinkAccount: async (account: any) => undefined,
+  getSessionAndUser: async (sessionToken: string) => null,
+  createSession: async (data: any) => data,
+  updateSession: async (data: any) => data,
+  deleteSession: async (sessionToken: string) => null,
+  createVerificationToken: async (data: any) => data,
+  useVerificationToken: async (params: any) => null,
+});
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,

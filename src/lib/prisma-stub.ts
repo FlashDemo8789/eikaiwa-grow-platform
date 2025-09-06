@@ -5,6 +5,20 @@
 export type PrismaClient = any;
 export type Prisma = any;
 
+// Mock Decimal type for numeric values
+export class Decimal {
+  constructor(public value: number | string) {}
+  toString() { return String(this.value); }
+  toNumber() { return Number(this.value); }
+  toFixed(digits: number = 2) { return Number(this.value).toFixed(digits); }
+  static isDecimal(value: any): value is Decimal { return value instanceof Decimal; }
+}
+
+// Mock types for reminders
+export type ReminderType = 'PAYMENT_DUE' | 'OVERDUE' | 'CUSTOM';
+export type NotificationMethod = 'EMAIL' | 'SMS' | 'BOTH';
+export type ReminderStatus = 'PENDING' | 'SENT' | 'FAILED';
+
 // Mock enums that are commonly used
 export const PaymentStatus = {
   PENDING: 'PENDING',

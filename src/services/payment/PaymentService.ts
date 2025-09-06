@@ -414,4 +414,4 @@ export class PaymentService {
 }
 
 // Import Decimal properly
-import { Decimal } from '@prisma/client/runtime/library';
+import { Decimal } from '@/lib/prisma-stub';

@@ -520,4 +520,4 @@ export class StripePaymentService {
   }
 }
 
-import { Decimal } from '@prisma/client/runtime/library';
+import { Decimal } from '@/lib/prisma-stub';

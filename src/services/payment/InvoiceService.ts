@@ -8,7 +8,7 @@ import type {
 import { TaxCalculationService } from './TaxCalculationService';
 import { PaymentAuditService } from './PaymentAuditService';
 import { logger } from '@/lib/logger';
-import { Decimal } from '@prisma/client/runtime/library';
+import { Decimal } from '@/lib/prisma-stub';
 
 export class InvoiceService {
   private prisma: PrismaClient;
