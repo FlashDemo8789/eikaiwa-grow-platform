@@ -18,8 +18,8 @@ export async function POST(request: NextRequest) {
     const validation = loginSchema.safeParse(body)
     if (!validation.success) {
       return ApiResponseBuilder.validationError(
-        validation.error.errors[0].message,
-        validation.error.errors[0].path[0] as string
+        (validation.error as any).errors[0].message,
+        (validation.error as any).errors[0].path[0] as string
       )
     }
 

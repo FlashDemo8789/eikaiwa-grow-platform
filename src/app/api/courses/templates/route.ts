@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { ApiResponse } from "@/lib/api-response"
+import { ApiResponseBuilderBuilder, type ApiResponseBuilder } from "@/lib/api-response"
 
 // Mock course templates database
 const mockTemplates = [
@@ -140,13 +140,13 @@ export async function GET(request: NextRequest) {
       filteredTemplates = filteredTemplates.filter(template => template.isPopular)
     }
 
-    return ApiResponse.success({
+    return ApiResponseBuilder.success({
       templates: filteredTemplates,
       total: filteredTemplates.length
     })
   } catch (error) {
     console.error('Error fetching course templates:', error)
-    return ApiResponse.error('Failed to fetch course templates', 500)
+    return ApiResponseBuilder.error('Failed to fetch course templates', 500)
   }
 }
 
@@ -157,13 +157,13 @@ export async function POST(request: NextRequest) {
     const { templateId, customizations } = body
 
     if (!templateId) {
-      return ApiResponse.error('Template ID is required', 400)
+      return ApiResponseBuilder.error('Template ID is required', 400)
     }
 
     const template = mockTemplates.find(t => t.id === templateId)
     
     if (!template) {
-      return ApiResponse.error('Template not found', 404)
+      return ApiResponseBuilder.error('Template not found', 404)
     }
 
     // Create course from template with any customizations
@@ -198,13 +198,13 @@ export async function POST(request: NextRequest) {
       mockTemplates[templateIndex].usageCount += 1
     }
 
-    return ApiResponse.success({
+    return ApiResponseBuilder.success({
       message: 'Course created from template successfully',
       course: newCourse,
       template: template
     }, 201)
   } catch (error) {
     console.error('Error creating course from template:', error)
-    return ApiResponse.error('Failed to create course from template', 500)
+    return ApiResponseBuilder.error('Failed to create course from template', 500)
   }
 }

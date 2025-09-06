@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { ApiResponse } from "@/lib/api-response"
+import { ApiResponseBuilderBuilder, type ApiResponseBuilder } from "@/lib/api-response"
 
 // Mock database - in a real app, this would be replaced with actual database operations
 let mockCourses = [
@@ -48,36 +48,36 @@ let mockCourses = [
 // GET /api/courses/[courseId] - Get a specific course
 export async function GET(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
-    const courseId = params.courseId
+    const { courseId } = await params
     const course = mockCourses.find(c => c.id === courseId)
 
     if (!course) {
-      return ApiResponse.error('Course not found', 404)
+      return ApiResponseBuilder.error('Course not found', 404)
     }
 
-    return ApiResponse.success(course)
+    return ApiResponseBuilder.success(course)
   } catch (error) {
     console.error('Error fetching course:', error)
-    return ApiResponse.error('Failed to fetch course', 500)
+    return ApiResponseBuilder.error('Failed to fetch course', 500)
   }
 }
 
 // PUT /api/courses/[courseId] - Update a specific course
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
-    const courseId = params.courseId
+    const { courseId } = await params
     const body = await request.json()
     
     const courseIndex = mockCourses.findIndex(c => c.id === courseId)
     
     if (courseIndex === -1) {
-      return ApiResponse.error('Course not found', 404)
+      return ApiResponseBuilder.error('Course not found', 404)
     }
 
     // Validate required fields if they're being updated
@@ -87,7 +87,7 @@ export async function PUT(
     )
     
     if (missingFields.length > 0) {
-      return ApiResponse.error(`Invalid fields: ${missingFields.join(', ')}`, 400)
+      return ApiResponseBuilder.error(`Invalid fields: ${missingFields.join(', ')}`, 400)
     }
 
     // Update course
@@ -106,31 +106,31 @@ export async function PUT(
 
     mockCourses[courseIndex] = updatedCourse
 
-    return ApiResponse.success(updatedCourse)
+    return ApiResponseBuilder.success(updatedCourse)
   } catch (error) {
     console.error('Error updating course:', error)
-    return ApiResponse.error('Failed to update course', 500)
+    return ApiResponseBuilder.error('Failed to update course', 500)
   }
 }
 
 // DELETE /api/courses/[courseId] - Delete a specific course
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { courseId: string } }
+  { params }: { params: Promise<{ courseId: string }> }
 ) {
   try {
-    const courseId = params.courseId
+    const { courseId } = await params
     const courseIndex = mockCourses.findIndex(c => c.id === courseId)
     
     if (courseIndex === -1) {
-      return ApiResponse.error('Course not found', 404)
+      return ApiResponseBuilder.error('Course not found', 404)
     }
 
     const course = mockCourses[courseIndex]
 
     // Check if course has enrolled students
     if (course.enrolled > 0) {
-      return ApiResponse.error(
+      return ApiResponseBuilder.error(
         'Cannot delete course with enrolled students. Please transfer students first.',
         400
       )
@@ -139,12 +139,12 @@ export async function DELETE(
     // Remove course from array
     mockCourses.splice(courseIndex, 1)
 
-    return ApiResponse.success({ 
+    return ApiResponseBuilder.success({ 
       message: 'Course deleted successfully',
       deletedCourse: course 
     })
   } catch (error) {
     console.error('Error deleting course:', error)
-    return ApiResponse.error('Failed to delete course', 500)
+    return ApiResponseBuilder.error('Failed to delete course', 500)
   }
 }

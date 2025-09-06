@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { ApiResponse } from "@/lib/api-response"
+import { ApiResponseBuilderBuilder, type ApiResponseBuilder } from "@/lib/api-response"
 
 // Mock database - in a real app, this would be replaced with actual database operations
 let mockCourses = [
@@ -86,7 +86,7 @@ export async function GET(request: NextRequest) {
     const endIndex = startIndex + limit
     const paginatedCourses = filteredCourses.slice(startIndex, endIndex)
 
-    return ApiResponse.success({
+    return ApiResponseBuilder.success({
       courses: paginatedCourses,
       pagination: {
         page,
@@ -99,7 +99,7 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error fetching courses:', error)
-    return ApiResponse.error('Failed to fetch courses', 500)
+    return ApiResponseBuilder.error('Failed to fetch courses', 500)
   }
 }
 
@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
     const missingFields = requiredFields.filter(field => !body[field])
     
     if (missingFields.length > 0) {
-      return ApiResponse.error(`Missing required fields: ${missingFields.join(', ')}`, 400)
+      return ApiResponseBuilder.error(`Missing required fields: ${missingFields.join(', ')}`, 400)
     }
 
     // Create new course
@@ -140,9 +140,9 @@ export async function POST(request: NextRequest) {
 
     mockCourses.push(newCourse)
 
-    return ApiResponse.success(newCourse, 201)
+    return ApiResponseBuilder.success(newCourse, 201)
   } catch (error) {
     console.error('Error creating course:', error)
-    return ApiResponse.error('Failed to create course', 500)
+    return ApiResponseBuilder.error('Failed to create course', 500)
   }
 }

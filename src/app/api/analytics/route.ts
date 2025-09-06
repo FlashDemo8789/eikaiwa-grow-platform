@@ -106,14 +106,15 @@ type AnalyticsMetrics = {
  * GET /api/analytics - Get comprehensive analytics data
  */
 export async function GET(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+  
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return ApiResponseBuilder.unauthorizedError();
     }
 
     const { searchParams } = new URL(request.url);
-    const queryParams = Object.fromEntries(searchParams);
+    const queryParams: any = Object.fromEntries(searchParams);
 
     // Parse metrics parameter if it exists
     if (queryParams.metrics) {
@@ -149,13 +150,13 @@ export async function GET(request: NextRequest) {
     return ApiResponseBuilder.success(response, 'Analytics data retrieved successfully');
 
   } catch (error) {
-    logger.error('Failed to retrieve analytics data', {
+    logger.error({ 
       error: error instanceof Error ? error.message : error,
-      userId: session?.user?.id,
-    });
+      userId: (session as any)?.user?.email 
+    }, 'Failed to retrieve analytics data');
 
     if (error instanceof z.ZodError) {
-      return ApiResponseBuilder.validationError('Invalid query parameters', error.errors[0]?.path?.[0] as string);
+      return ApiResponseBuilder.validationError('Invalid query parameters');
     }
 
     return ApiResponseBuilder.internalError('Failed to retrieve analytics data');

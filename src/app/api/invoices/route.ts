@@ -39,7 +39,7 @@ const listInvoicesSchema = z.object({
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -75,12 +75,12 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     logger.error('Failed to list invoices', {
       error: error.message,
-      userId: session?.user?.id,
+      userId: session?.user?.email,
     });
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid parameters', details: error.errors },
+        { error: 'Invalid parameters', details: (error as any).errors },
         { status: 400 }
       );
     }
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -154,12 +154,12 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     logger.error('Failed to create invoice', {
       error: error.message,
-      userId: session?.user?.id,
+      userId: session?.user?.email,
     });
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: (error as any).errors },
         { status: 400 }
       );
     }

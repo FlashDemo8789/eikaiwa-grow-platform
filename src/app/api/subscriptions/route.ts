@@ -27,7 +27,7 @@ const createSubscriptionSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
@@ -77,12 +77,12 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     logger.error('Failed to create subscription', {
       error: error.message,
-      userId: session?.user?.id,
+      userId: session?.user?.email,
     });
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: (error as any).errors },
         { status: 400 }
       );
     }
